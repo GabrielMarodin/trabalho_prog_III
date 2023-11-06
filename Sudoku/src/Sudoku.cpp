@@ -5,6 +5,10 @@ Sudoku::Sudoku()
 {
 
 }
+int genRandNum(int maxLimit)
+{
+  return rand()%maxLimit;
+}
 bool FindUnassignedLocation(int grid[9][9], int &row, int &col)
 {
     for (row = 0; row < 9; row++)
