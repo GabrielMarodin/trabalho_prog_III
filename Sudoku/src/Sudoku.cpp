@@ -1,14 +1,42 @@
 #include "Sudoku.h"
 using namespace std;
-
-Sudoku::Sudoku()
+int Sudoku::getCell(int i, int j)
 {
-
+  return grid[i][j];
 }
 int genRandNum(int maxLimit)
 {
   return rand()%maxLimit;
 }
+Sudoku::Sudoku()
+{
+ for(int i=0;i<81;i++)
+  {
+    this->gridPos[i] = i;
+  }
+
+  random_shuffle(this->gridPos, (this->gridPos) + 81, genRandNum);
+
+
+  for(int i=0;i<9;i++)
+  {
+    this->guessNum[i]=i+1;
+  }
+
+  random_shuffle(this->guessNum, (this->guessNum) + 9, genRandNum);
+
+
+  for(int i=0;i<9;i++)
+  {
+    for(int j=0;j<9;j++)
+    {
+      this->grid[i][j]=0;
+    }
+  }
+
+  grid_status = true;
+}
+
 bool FindUnassignedLocation(int grid[9][9], int &row, int &col)
 {
     for (row = 0; row < 9; row++)
@@ -116,5 +144,60 @@ void Sudoku::createSeed()
             this->solnGrid[i][j] = this->grid[i][j];
         }
     }
+}
+void Sudoku::printGrid()
+{
+  for(int i=0;i<9;i++)
+  {
+    for(int j=0;j<9;j++)
+    {
+    if(grid[i][j] == 0)
+		cout<<".";
+    else
+		cout<<grid[i][j];
+    cout<<"|";
+    }
+    cout<<endl;
+  }
+}
+void Sudoku::genPuzzle()
+{
+  for(int i=0;i<81;i++)
+  {
+    int x = (this->gridPos[i])/9;
+    int y = (this->gridPos[i])%9;
+    int temp = this->grid[x][y];
+    this->grid[x][y] = UNASSIGNED;
+
+    int check=0;
+    countSoln(check);
+    if(check!=1)
+    {
+      this->grid[x][y] = temp;
+    }
+  }
+}
+void Sudoku::countSoln(int &number)
+{
+  int row, col;
+
+  if(!FindUnassignedLocation(this->grid, row, col))
+  {
+    number++;
+    return ;
+  }
+
+
+  for(int i=0;i<9 && number<2;i++)
+  {
+      if( isSafe(this->grid, row, col, this->guessNum[i]) )
+      {
+        this->grid[row][col] = this->guessNum[i];
+        countSoln(number);
+      }
+
+      this->grid[row][col] = UNASSIGNED;
+  }
+
 }
 
