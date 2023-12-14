@@ -44,4 +44,4 @@ Ator Principal: Jogador
 Resumo: O jogador encerra o jogo atual.
 
 Fluxo Básico:
-O jogador seleciona a opção "Encerrar Jogo" ou fecha a janela. O sistema encerra o jogo e o programa.
+O jogador fecha a janela. O sistema encerra o jogo e o programa.
