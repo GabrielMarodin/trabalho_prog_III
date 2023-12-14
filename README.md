@@ -28,6 +28,15 @@ Resumo: O jogador solicita que o sistema resolva o tabuleiro automaticamente.
 Fluxo Básico:
 O jogador seleciona a opção "Resolver Tabuleiro". O sistema aplica um algoritmo de resolução ao tabuleiro atual. O sistema preenche as células do tabuleiro com a solução. O sistema exibe a solução ao jogador.
 
+**Caso de Uso: Novo jogo**
+
+Ator Principal: Jogador
+
+Resumo: O jogador seleciona a opção de iniciar um novo jo.
+
+Fluxo Básico:
+O jogador seleciona a opção "Novo". O sistema gera outro jogo.
+
 **Caso de Uso: Encerrar Jogo**
 
 Ator Principal: Jogador
